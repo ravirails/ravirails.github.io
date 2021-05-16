@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Uploading Attachments in Rails Using Active Storage</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="plugins/prismjs/prism.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-danger">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">APPSIMPACT Academy</a>
+        <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="posts.html">Posts</a>
+          </li>
+        </ul> -->
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9 col-md-12 mx-lg-auto">
+          <h1 class="display-6 mt-5 mb-5">Uploading Attachments in Rails Using Active Storage</h1>
+
+          <div class="mt-4 mb-4">
+            <img src="images/blogs/Appsimpact-Technologies-Ruby-on-rails-using-active-storage-02.png" class="img-fluid">
+          </div>
+
+          <div class="article-content">
+            <p class="lead font-weight-400"><strong>Active Storage</strong> is a feature in Rails(applicable in versions >= 5.2) which facilitates uploading files to a cloud storage service like Amazon S3, Google Cloud Storage, or Microsoft Azure Storage and attaching those files to Active Record objects. It comes with a local disk-based service for development and testing and supports mirroring files to subordinate services for backups and migrations.</p>
+
+            <p class="lead font-weight-400">
+              Active storage provides an easy and streight forward way to upload images without using additional gems like paperclip, carrierwave, shrine (which were in most use before rails 5.2).
+            </p>
+
+            <h1>How to Setup Active Storage:</h1>
+
+            <h2 class="mt-4"><a href="#step-1">1. Create a new rails app</a></h2>
+
+            <div id="step-1" class="mt-3">
+              <p class="lead font-weight-400">Here I am creating a new rails application but please read the post carefully and you can apply the main feature in your existing application as well.</p>
+              <pre>
+                <code class="language-ruby">
+                  <span>rails new active-storage-demo</span>
+                </code>
+              </pre>
+              <pre>
+                <code class="language-ruby">  
+                  <span>cd active-storage-demo</span>
+                </code>
+              </pre>
+              <pre>
+                <code class="language-ruby">  
+                  <span>bundle install</span>
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-2">2. Create a model into which we will use ActiveStorage for uploading image</a></h2>
+
+            <div id="step-2" class="mt-3">
+              <p class="lead font-weight-400">Here at this stage I am creating a model with name Post, but I am just taking this for an example, you can choose any name for your resource. You just need to do few things in your model class.</p>
+              <p class="lead font-weight-400">Run following command into your terminal:</p>
+              <pre>
+                <code class="language-ruby">
+                  <span>rails g scaffold post title:string content:text</span>
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-3">3. Adding Active storage to application</a></h2>
+
+            <div id="step-3" class="mt-3">
+              <p class="lead font-weight-400">Since Active Storage also require  active_storage_blobs and active_storage_attachments tables to store attachments so we also need to create these tables as well. You need to run following command for getting migration for both tables:</p>
+              <pre>
+                <code class="language-ruby">
+                  <span>rails active_storage:install</span>
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-4">4. Run Migration</a></h2>
+
+            <div id="step-4" class="mt-3">
+              <p class="lead font-weight-400">Now Run following commands to get all tables into your schema:</p>
+              <pre>
+                <code class="language-ruby">
+                  <span>rails db:migrate</span>
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-5">5. Add attachments attributes into model</a></h2>
+
+            <div id="step-5" class="mt-3">
+              <p class="lead font-weight-400">Now add following line into your <strong>post</strong> model:</p>
+              <pre>
+                <code class="language-ruby">
+                  <span>has_one_attached :cover_image</span>
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-6">6. Permitting cover_image as params</a></h2>
+
+            <div id="step-6" class="mt-3">
+              <p class="lead font-weight-400">Open your <code class="language-ruby">app/controllers/posts_controller.rb</code> and replace following method</p>
+              <pre>
+                <code class="language-ruby">
+                  def post_params
+                    params.require(:post).permit(:title, :content)
+                  end
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400">with following:</p>
+              <pre>
+                <code class="language-ruby">
+                  def post_params
+                    params.require(:post).permit(:title, :content, :cover_image)
+                  end
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-7">7. Add cover_image field to form</a></h2>
+
+            <div id="step-7" class="mt-3">
+              <p class="lead font-weight-400">Now since active storage attachment attributes will not be added to the table of model class, we need to add this into form manually. Add following snippet into <code class="language-ruby">app/views/posts/_form.html.erb</code>, before submit button</p>
+              <pre>
+                <code class="language-rails">
+                  <xmp>
+                    <div class="field">
+                      <%= form.label :cover_image %><br>
+                      <%= form.file_field :cover_image %>
+                    </div>
+                  </xmp>
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400">that's it. So far we have done everything to upload image and store this inot database.</p>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-8">8. Display active storage attachment to view</a></h2>
+
+            <div id="step-8" class="mt-3">
+              <p class="lead font-weight-400">open your <code class="language-ruby">app/views/posts/show.html.erb</code> and following line to top of the file:</p>
+              <pre>
+                <code class="language-markup">
+                  <%= image_tag @post.cover_image %>
+                </code>
+              </pre>
+              <p class="lead font-weight-400">If you want to make a check that whether <code>cover_image</code> exists or not than you can use following snippet instead of above line:</p>
+              <pre>
+                <code class="language-rails">
+                  <xmp>
+                    <% if @post.cover_image.attached? %>
+                      <%= image_tag @post.cover_image %>
+                    <% else %>
+                      <p>No Cover Image Uploaded</p>
+                    <% end %>
+                  </xmp>
+                </code>
+              </pre>
+              <p class="lead font-weight-400">And you are done.</p>
+              <p class="lead font-weight-400">Visit <a href="http://localhost:3000/posts/new" target="_blank">http://localhost:3000/posts/new</a> and create a new post by uploading a new cover image for this post. Save it and display this post. You will see cover_image with post details.</p>
+              <p class="lead font-weight-400">These steps will work fine for <code>development</code> and <code>test</code> environment. But what if you want to upload image in production environment? You can not use local file system there to keep your images. You must use one the cloud providers mentioned in the beginning of the blog. Here I am going to show you that how we can store our images Amazon S3 cloud storage. You need to do following things for this:</p>
+            </div>
+
+            <h2 class="mt-4"><a href="#aws-step-1">1. Set amazon as active storage bucket</a></h2>
+
+            <div id="aws-step-1" class="mt-3">
+              <p class="lead font-weight-400">Open your <code class="language-ruby"> config/environments/production.rb</code> and replace following line:</p>
+              <pre>
+                <code class="language-ruby">
+                  config.active_storage.service = :local
+                </code>
+              </pre>
+              <p class="lead font-weight-400">with</p>
+              <pre>
+                <code class="language-ruby">
+                  config.active_storage.service = :amazon
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#aws-step-2">2. Configure storage.yml</a></h2>
+
+            <div id="aws-step-2" class="mt-3">
+              <p class="lead font-weight-400">Open your <code class="language-ruby">config/storage.yml</code> and uncomment following lines::</p>
+              <pre>
+                <code class="language-yml">
+                  amazon:
+                    service: S3
+                    access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
+                    secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
+                    region: <%= Rails.application.credentials.dig(:aws, :aws_region) %>
+                    bucket: <%= Rails.application.credentials.dig(:aws, :aws_bucket) %>
+                </code>
+              </pre>
+              <p class="lead font-weight-400">However you must edit your credentials before uncommenting these lines and set your AWS credentials there. Run following command to set the AWS secrets.</p>
+
+              <pre>
+                <code class="language-ruby">
+                  rails credentials:edit
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400">If you are not familiar with rails credentials and you want to use any gems(dotenv or figaro) for managing your env variables you can simply do following configuration.</p>
+
+              <pre>
+                <code class="language-yaml">
+                  amazon:
+                    service: S3
+                    access_key_id: <%= ENV['AWS_ACCESS_KEY'] %>
+                    secret_access_key: <%= ENV['AWS_SECRET_KEY'] %>
+                    region: <%= ENV['AWS_REGION'] %>
+                    bucket: <%= ENV['AWS_BUCKET'] %>
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400">Just make sure to define these ENV vars in your production environment.</p>
+            </div>
+
+            <h2 class="mt-4"><a href="#aws-step-3">3. Add aws-sdk gem in your Gemfile:</a></h2>
+
+            <div id="aws-step-3" class="mt-3">
+              <p class="lead font-weight-400">Add following line to bottom of your Gemfile and Run bundle install:</p>
+              <pre>
+                <code class="language-ruby">
+                  gem "aws-sdk-s3", require: false
+                </code>
+              </pre>
+              <p class="lead font-weight-400">now run</p>
+              <pre>
+                <code class="language-shell">
+                  bundle install
+                </code>
+              </pre>
+              <p class="lead font-weight-400">That's it.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    <script src="plugins/prismjs/prism.js"></script>
+  </body>
+</html>

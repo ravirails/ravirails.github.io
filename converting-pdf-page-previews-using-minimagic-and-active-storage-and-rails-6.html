@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Converting PDF page previews using Minimagic and Active Storage and Rails 6</title>
+    <meta name="description" content="In this post I am going to demonstrate that how to upload PDF file into Rails using Active Storage and create image previews of pages of uploaded PDF. I am going to explain everything required to achieve the task into this post.">
+    <meta name="keywords" content="minimagic and active storage, create pdf preview with minimagic and active storage">
+    <meta name="twitter:site_name" content="AI - Academy">
+    <meta name="twitter:site" content="AI - Academy">
+    <meta name="twitter:card" content="Converting PDF page previews using Minimagic and Active Storage and Rails 6">
+    <meta name="twitter:description" content="In this post I am going to demonstrate that how to upload PDF file into Rails using Active Storage and create image previews of pages of uploaded PDF.  I am going to explain everything required to achieve the task into this post.">
+    <meta name="twitter:image" content="https://appsimpact-academy.s3.us-east-2.amazonaws.com/rtmg9bxuq3yjauzztl4nt1cwt26k?response-content-disposition=inline%3B%20filename%3D%22Blog-Post-Image-Coming-Soon.png%22%3B%20filename%2A%3DUTF-8%27%27Blog-Post-Image-Coming-Soon.png&amp;response-content-type=image%2Fpng&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATUMRTR7EGHSSOYXU%2F20210516%2Fus-east-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210516T155254Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=fe4fa2ec47667da1a17b18ff5e0b671c32c0c02badb38b98d4469aea491beaec">
+    <meta property="og:url" content="https://ai-academy.herokuapp.com/blogs/converting-pdf-page-previews-using-minimagic-and-active-storage-and-rails-6">
+    <meta property="og:site_name" content="AI - Academy">
+    <meta property="og:title" content="Converting PDF page previews using Minimagic and Active Storage and Rails 6">
+    <meta property="og:image" content="https://appsimpact-academy.s3.us-east-2.amazonaws.com/rtmg9bxuq3yjauzztl4nt1cwt26k?response-content-disposition=inline%3B%20filename%3D%22Blog-Post-Image-Coming-Soon.png%22%3B%20filename%2A%3DUTF-8%27%27Blog-Post-Image-Coming-Soon.png&amp;response-content-type=image%2Fpng&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATUMRTR7EGHSSOYXU%2F20210516%2Fus-east-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210516T155254Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=fe4fa2ec47667da1a17b18ff5e0b671c32c0c02badb38b98d4469aea491beaec">
+    <meta property="og:description" content="In this post I am going to demonstrate that how to upload PDF file into Rails using Active Storage and create image previews of pages of uploaded PDF.  I am going to explain everything required to achieve the task into this post.">
+    <meta property="og:keywords" content="minimagic and active storage">
+    <meta property="og:keywords" content="create pdf preview with minimagic and active storage">
+    <meta property="og:type" content="website">
+    <meta name="image" content="https://appsimpact-academy.s3.us-east-2.amazonaws.com/rtmg9bxuq3yjauzztl4nt1cwt26k?response-content-disposition=inline%3B%20filename%3D%22Blog-Post-Image-Coming-Soon.png%22%3B%20filename%2A%3DUTF-8%27%27Blog-Post-Image-Coming-Soon.png&amp;response-content-type=image%2Fpng&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATUMRTR7EGHSSOYXU%2F20210516%2Fus-east-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210516T155254Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=fe4fa2ec47667da1a17b18ff5e0b671c32c0c02badb38b98d4469aea491beaec">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="plugins/prismjs/prism.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-danger">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">APPSIMPACT Academy</a>
+        <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="posts.html">Posts</a>
+          </li>
+        </ul> -->
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9 col-md-12 mx-lg-auto">
+          <h1 class="display-6 mt-5 mb-5">Converting PDF page previews using Minimagic and Active Storage and Rails 6</h1>
+
+          <div class="mt-4 mb-4">
+            <img src="images/blogs/Blog-Post-Image-Coming-Soon.png" class="img-fluid">
+          </div>
+
+          <div class="article-content">
+            <h1>Hello Folks!</h1>
+
+            <p class="lead font-weight-400">In this post I am going to demonstrate that how to upload PDF file into Rails using Active Storage and create image previews of pages of uploaded PDF. I am going to explain everything required to achieve the task into this post but I would like you to prefer my following blog posts because both will give you idea of adding bootstrap and active storage into rails app respectively.</p>
+
+            <p>
+              <a href="how-to-add-bootstrap-4-to-your-rails-6-application" target="_blank">
+                How to add bootstrap 4 to your Rails 6 application?
+              </a>
+            </p>
+
+            <p>
+              <a href="uploading-attachments-in-rails-using-active-storage.html" target="_blank">
+                Uploading Attachments in Rails Using Active Storage
+              </a>
+            </p>
+
+            <p class="lead font-weight-400">
+              However this is not nacessory though, because I will mainly cover the creating previews of PDF images part and at the end of this blog post I will provide the repository url for the work we have done in this post.
+            </p>
+
+            <p class="lead font-weight-400">
+              So enough talking and let's start with the task now. Just go through following steps:
+            </p>
+
+            <h2 class="mt-4"><a href="#step-1">1. Create a new rails app</a></h2>
+
+            <div id="step-1" class="mt-3">
+              <p class="lead font-weight-400">Here I am creating a new rails application but please read the post carefully and you can apply the main feature in your existing application as well.</p>
+              <pre>
+                <code class="language-ruby">
+                  <span>rails new pdf-preview-demo</span>
+                </code>
+              </pre>
+              <pre>
+                <code class="language-ruby">  
+                  <span>cd pdf-preview-demo</span>
+                </code>
+              </pre>
+              <pre>
+                <code class="language-ruby">  
+                  <span>bundle install</span>
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-2">2. Create a model for uploading PDF</a></h2>
+
+            <div id="step-2" class="mt-3">
+              <p class="lead font-weight-400">Here at this stage I am creating a model with name document, but I am just taking this for an example, you can choose any name for your resource. You just need to do few things in your model class.</p>
+              <p class="lead font-weight-400">Run following command into your terminal:</p>
+              <pre>
+                <code class="language-ruby">
+                  <span>rails g scaffold document title:string description:text</span>
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-3">3. Adding Active storage to application</a></h2>
+
+            <div id="step-3" class="mt-3">
+              <p class="lead font-weight-400">Since Active Storage also require  active_storage_blobs and active_storage_attachments tables to store attachments so we also need to create these tables as well. You need to run following command for getting migration for both tables:</p>
+              <pre>
+                <code class="language-ruby">
+                  <span>rails active_storage:install</span>
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-4">4. Run Migration</a></h2>
+
+            <div id="step-4" class="mt-3">
+              <p class="lead font-weight-400">Now Run following commands to get all tables into your schema:</p>
+              <pre>
+                <code class="language-ruby">
+                  <span>rails db:migrate</span>
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-5">5. Add attachments attributes into model</a></h2>
+
+            <div id="step-5" class="mt-3">
+              <p class="lead font-weight-400">Now we need attachments attributes for our model class. Since we are going to create preview of uploaded PDF pages, we require two attachment fields. Add both fields into your model. Open <code class="language-ruby">app/models/document.rb</code> and following lines into it:</p>
+              <pre>
+                <code class="language-ruby">
+                  <span># This is for uploading PDF</span><br>
+                  <span>has_one_attached :doc_file</span>
+
+                  <span># This is uploading inages of pages of PDF</span><br>
+                  <span>has_many_attached :doc_file_pages</span>
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400">So far at this stage your model should look like as below:</p>
+              <pre>
+                <code class="language-ruby">
+                  class Document < ApplicationRecord
+                    validates :title, :description, presence: true
+                    # Active storage attachments
+                    has_one_attached :doc_file
+                    has_many_attached :doc_file_pages
+                  end
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-6">6. Permitting doc_file as params</a></h2>
+
+            <div id="step-6" class="mt-3">
+              <p class="lead font-weight-400">Open your <code class="language-ruby">app/controllers/documents_controller.rb</code> and replace following method</p>
+              <pre>
+                <code class="language-ruby">
+                  def document_params
+                    params.require(:document).permit(:title, :description)
+                  end
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400">with following:</p>
+              <pre>
+                <code class="language-ruby">
+                  def document_params
+                    params.require(:document).permit(:title, :description, :doc_file)
+                  end
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-7">7. Add doc_file field to form</a></h2>
+
+            <div id="step-7" class="mt-3">
+              <p class="lead font-weight-400">Now since active storage attachment attributes will not be added to the table of model class, we need to add this into form manually. Add following snippet into <code class="language-ruby">app/views/documents/_form.html.erb</code>, before submit button</p>
+              <pre>
+                <code class="language-rails">
+                  <xmp>
+                    <div class="field">
+                      <%= form.label :upload_your_pdf_file_here %><br>
+                      <%= form.file_field :doc_file, required: true %>
+                    </div>
+                  </xmp>
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-8">8. Add Minimagic gem to Gemfile</a></h2>
+
+            <div id="step-8" class="mt-3">
+              <p class="lead font-weight-400">Add following line to bottom of your Gemfile and Run bundle install:</p>
+              <pre>
+                <code class="language-ruby">
+                  gem 'mini_magick', '>= 4.9.5'
+                </code>
+              </pre>
+              <p class="lead font-weight-400">now run</p>
+              <pre>
+                <code class="language-shell">
+                  bundle install
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-9">9. Add method to convert pdf pages into images into model</a></h2>
+
+            <div id="step-9" class="mt-3">
+              <p class="lead font-weight-400">Open <code class="language-ruby">app/models/document.rb</code> and add following method into it:</p>
+              <pre>
+                <code class="language-ruby">
+                  def convert_pdf_to_image
+                    document = self
+                    # path to current doc_file
+                    doc_path = ActiveStorage::Blob.service.send(:path_for, document.doc_file.key)
+                    # set minimagick image wrapper for pdf stored in @doc.uplaod
+                    magick = MiniMagick::Image.open(doc_path)
+                    magick.pages.each_with_index do |page, index|
+                      file_name = "page_#{(index+1).to_s}"
+                      # set path for tempfile that you are about to create
+                      converted_file_path = File.join(Dir.tmpdir, "#{file_name}-#{Time.now.strftime("%Y%m%d")}-#{$$}-#{rand(0x100000000).to_s(36)}-.png")
+                      # create png and save to tempfile path
+                      MiniMagick::Tool::Convert.new do |convert|
+                        # prep format
+                        convert.background "white"
+                        convert.flatten
+                        convert.density 300
+                        convert.quality 100
+                        # add page to be converted,./
+                        convert << page.path
+                        # add path of page to be converted
+                        convert << converted_file_path
+                      end
+                      document.doc_file_pages.attach(io: File.open(converted_file_path), filename: file_name, content_type: "image/png")
+                    end
+                  end
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-10">10. Call convert_pdf_to_image method after saving document</a></h2>
+
+            <div id="step-10" class="mt-3">
+              <p class="lead font-weight-400">Since now we have method for converting pdf pages into images into our model class we need to call this method into controller right after saving the document. Open your <code class="language-ruby">app/controllers/documents_controller.rb</code> and replace create action into it by following method:</p>
+              <pre>
+                <code class="language-ruby">
+                  def create
+                    @document = Document.new(document_params)
+                    respond_to do |format|
+                      if @document.save
+                        @document.convert_pdf_to_image
+                        format.html { redirect_to @document, notice: "Document was successfully created." }
+                        format.json { render :show, status: :created, location: @document }
+                      else
+                        format.html { render :new, status: :unprocessable_entity }
+                        format.json { render json: @document.errors, status: :unprocessable_entity }
+                      end
+                    end
+                  end
+                </code>
+              </pre>
+              <p class="lead font-weight-400">And you done with all steps here.</p>
+
+              <p class="lead font-weight-400">Now give it a try. Open <a href="http://localhost:3000/documents/new" target="_blank">http://localhost:3000/documents/new</a> and Create a document. Upload a PDF file of minimum of 2 pages (you can add single page PDF as well but to test previews in better way, I would recommend to upload a multipage PDF).</p>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-11">11. Display PDF pages as images</a></h2>
+
+            <div id="step-11" class="mt-3">
+              <p class="lead font-weight-400">Now since you have upload your document and created its preview, you will definitely like to see the images. No worries, just open your <code class="language-ruby">app/views/documents/show.html.erb</code> and paste following snippet into it:</p>
+              <pre>
+                <code class="language-markup">
+                  <% if @document.doc_file_pages.attached? %>
+                    <% @document.doc_file_pages.each do |doc_page| %>
+                      <xmp>
+                        <div style="margin-top: 20px;">
+                          <%= image_tag doc_page, style: "width:500px;height:500px;" %>
+                        </div>
+                      </xmp>
+                    <% end %>
+                  <% end %>
+                </code>
+              </pre>
+              <p class="lead font-weight-400">That's it! We are done. Now you can customise this according to your need. But the main challenge for creating previews of PDF has been solved.</p>
+            </div>
+
+            <h1 class="mt-4"><a href="#step-12">WARNING: Minimagic Auth Error While Creating Preview</a></h1>
+
+            <div id="step-12" class="mt-3">
+              <p class="lead font-weight-400">You might get following error while creating preview images of pdf pages.</p>
+              <pre>
+                <code class="language-shell">
+                  MiniMagick::Invalid (`identify /tmp/mini_magick20210515-8656-tjz3ib` failed with error:
+                  identify-im6.q16: not authorized `/tmp/mini_magick20210515-8656-tjz3ib' @ error/constitute.c/ReadImage/412.
+                  ):
+                </code>
+              </pre>
+              <p class="lead font-weight-400">This error usually occurs if you use Minimagic first time on your system or try to create tmp files using Minimagic</p>
+
+              <p class="lead font-weight-400">Don't Worry.</p>
+              <p class="lead font-weight-400">Do following things:</p>
+              <p class="lead font-weight-400">Run following command on terminal:</p>
+              <pre>
+                <code class="language-shell">
+                  sudo subl /etc/ImageMagick-6/policy.xml
+                </code>
+              </pre>
+              <p class="lead font-weight-400">and find following line into the file opened:</p>
+              <pre>
+                <code class="language-xml">
+                  <xmp>
+                    <policy domain="coder" rights="none" pattern="PDF" />
+                  </xmp>
+                </code>
+              </pre>
+              <p class="lead font-weight-400">and replace with following line:</p>
+              <pre>
+                <code class="language-xml">
+                  <xmp>
+                    <policy domain="coder" rights="read | write" pattern="PDF" />
+                  </xmp>
+                </code>
+              </pre>
+              <p class="lead font-weight-400">Now you done completely.</p>
+              <p class="lead font-weight-400">You can find more organised codebase for this blog post here: <a href="https://github.com/RaviSys/pdf-preview-demo" target="_blank">https://github.com/RaviSys/pdf-preview-demo</a>.</p>
+            </div>
+            
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+
+    <script src="plugins/prismjs/prism.js"></script>
+
+  </body>
+</html>
