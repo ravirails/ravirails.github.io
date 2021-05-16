@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How to add bootstrap 4 to your Rails 6 application?</title>
+    <meta name="description" content="In the newer version of rails, Rails 6 sprockets are removed and webpacker has been introduced. And because of this change the javascript folder from app/assets/ has been removed and a now all javascript required for your application should be place at new location inside your app folder. Now all">
+    <meta name="keywords" content="rails 6 and twitter bootstrap, twitter bootstrap using webpacker, twitter bootstrap in rails 6 using webpacker">
+    <meta name="twitter:site_name" content="AI - Academy">
+    <meta name="twitter:site" content="AI - Academy">
+    <meta name="twitter:card" content="How to add bootstrap 4 to your Rails 6 application?">
+    <meta name="twitter:description" content="In the newer version of rails, Rails 6 sprockets are removed and webpacker has been introduced. And because of this change the javascript folder from app/assets/ has been removed and a now all javascript required for your application should be place at new location inside your app folder. Now all your javascript should be in app/javascripts.">
+    <meta name="twitter:image" content="https://appsimpact-academy.s3.us-east-2.amazonaws.com/j0xyb0p8bo1mvwwt6v1khuscig0s?response-content-disposition=inline%3B%20filename%3D%22How-to-add-bootstrap-4-to-your-Rails-6-application.png%22%3B%20filename%2A%3DUTF-8%27%27How-to-add-bootstrap-4-to-your-Rails-6-application.png&amp;response-content-type=image%2Fpng&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATUMRTR7EGHSSOYXU%2F20210516%2Fus-east-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210516T174839Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=c7052e0e8efc9e649acf73fafefa85f089e7b1c1897b703bcd165c91b0e352b2">
+    <meta property="og:url" content="https://ai-academy.herokuapp.com/blogs/how-to-add-bootstrap-4-to-your-rails-6-application">
+    <meta property="og:site_name" content="AI - Academy">
+    <meta property="og:title" content="How to add bootstrap 4 to your Rails 6 application?">
+    <meta property="og:image" content="https://appsimpact-academy.s3.us-east-2.amazonaws.com/j0xyb0p8bo1mvwwt6v1khuscig0s?response-content-disposition=inline%3B%20filename%3D%22How-to-add-bootstrap-4-to-your-Rails-6-application.png%22%3B%20filename%2A%3DUTF-8%27%27How-to-add-bootstrap-4-to-your-Rails-6-application.png&amp;response-content-type=image%2Fpng&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATUMRTR7EGHSSOYXU%2F20210516%2Fus-east-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210516T174839Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=c7052e0e8efc9e649acf73fafefa85f089e7b1c1897b703bcd165c91b0e352b2">
+    <meta property="og:description" content="In the newer version of rails, Rails 6 sprockets are removed and webpacker has been introduced. And because of this change the javascript folder from app/assets/ has been removed and a now all javascript required for your application should be place at new location inside your app folder. Now all your javascript should be in app/javascripts.">
+    <meta property="og:keywords" content="rails 6 and twitter bootstrap">
+    <meta property="og:keywords" content="twitter bootstrap using webpacker">
+    <meta property="og:keywords" content="twitter bootstrap in rails 6 using webpacker">
+    <meta property="og:type" content="website">
+    <meta name="image" content="https://appsimpact-academy.s3.us-east-2.amazonaws.com/j0xyb0p8bo1mvwwt6v1khuscig0s?response-content-disposition=inline%3B%20filename%3D%22How-to-add-bootstrap-4-to-your-Rails-6-application.png%22%3B%20filename%2A%3DUTF-8%27%27How-to-add-bootstrap-4-to-your-Rails-6-application.png&amp;response-content-type=image%2Fpng&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATUMRTR7EGHSSOYXU%2F20210516%2Fus-east-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210516T174839Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=c7052e0e8efc9e649acf73fafefa85f089e7b1c1897b703bcd165c91b0e352b2">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="plugins/prismjs/prism.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-danger">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">APPSIMPACT Academy</a>
+        <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="posts.html">Posts</a>
+          </li>
+        </ul> -->
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9 col-md-12 mx-lg-auto">
+          <h1 class="display-6 mt-5 mb-5">How to add bootstrap 4 to your Rails 6 application?</h1>
+
+          <div class="mt-4 mb-4">
+            <img src="images/blogs/How-to-add-bootstrap-4-to-your-Rails-6-application.png" class="img-fluid">
+          </div>
+
+          <div class="article-content">
+            <h1>Hello Folks!</h1>
+
+            <p class="lead font-weight-400">In the newer version of rails, Rails 6 sprockets are removed and webpacker has been introduced. And because of this change the javascript folder from app/assets/ has been removed and a now all javascript required for your application should be place at new location inside your app folder. Now all your javascript should be in app/javascripts.</p>
+
+            <p class="lead font-weight-400">
+              Now to add bootstrap 4 inside your Rails 6 application you have to follow steps given below:
+            </p>
+
+            <h2 class="mt-4"><a href="#step-1">1. Add Bootstrap and related dependencies to your Rails app using yarn</a></h2>
+
+            <div id="step-1" class="mt-3">
+              <p class="lead font-weight-400">Since bootstrap 4 is dependent on Jquery and popper.js so we also need to add these dependencies as well. Run following command to add all at once:</p>
+              <pre>
+                <code class="language-shell">
+                  <span>yarn add bootstrap@4.3.1 jquery popper.js</span>
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400">After running this command your package.json should have these dependencies included:</p>
+              <pre>
+                <code class="language-json">
+                  <span>
+                    "dependencies": {
+                      ................
+                      "bootstrap": "4.3.1",
+                      "jquery": "^3.5.1",
+                      "popper.js": "^1.16.1",
+                      ................
+                    }
+                  </span>
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-2">2. Update config/webpack/environment.js</a></h2>
+
+            <div id="step-2" class="mt-3">
+              <p class="lead font-weight-400">Now you need to update <code class="language-ruby">config/webpack/environment.js</code> file to add popper and Jquery as a plugin for your rails app. Your <code class="language-ruby">config/webpack/environment.js</code> should have this content.</p>
+              <pre>
+                <code class="language-javascript">
+                  <span>
+                    const { environment } = require('@rails/webpacker')
+
+                    const webpack = require("webpack")
+
+                    environment.plugins.append("Provide", new webpack.ProvidePlugin({
+                        $: 'jquery',
+                        jQuery: 'jquery',
+                        Popper: ['popper.js', 'default']
+                      })
+                    )
+
+                    module.exports = environment
+                  </span>
+                </code>
+              </pre>
+            </div>
+
+            <h2 class="mt-4"><a href="#step-3">3. Add bootstrap to application</a></h2>
+
+            <div id="step-3" class="mt-3">
+              <p class="lead font-weight-400">Now create a new directory inside <code class="language-ruby">app/javascript</code> and name it as css. And then inside this directory create a file with name <code class="language-ruby">application.scss</code>. And add following line in it:</p>
+              <pre>
+                <code class="language-css">
+                  <span>@import "~bootstrap/scss/bootstrap.scss";</span>
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400">And then change following line in <code class="language-ruby">app/views/layouts/application.html.erb</code></p>
+
+              <pre>
+                <code class="language-rails">
+                  <span><%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %></span>
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400">with </p>
+
+              <pre>
+                <code class="language-rails">
+                  <span><%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %></span>
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400">open your <code class="language-ruby">app/javascript/packs/application.js</code> and following line at bottom of it:</p>
+              <pre>
+                <code class="language-javascript">
+                  <span>import 'css/application';</span>
+                </code>
+              </pre>
+
+            </div>
+
+            <h2 class="mt-4"><a href="#step-4">4. Import bootstrap js</a></h2>
+
+            <div id="step-4" class="mt-3">
+              <p class="lead font-weight-400">Now in newer version of rails (Rails 6) we need to add our javascript libraries inside <code class="language-ruby">app/javascripts/packs/application.js</code>:</p>
+
+              <p class="lead font-weight-400">Add following lines at the bottom of <code class="language-ruby">app/javascripts/packs/application.js</code></p>
+              <pre>
+                <code class="language-javascript">
+                  import $ from 'jquery';
+                  global.$ = jQuery;
+
+                  import "bootstrap";
+                </code>
+              </pre>
+              <p class="lead font-weight-400">Cheers!!!</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    <script src="plugins/prismjs/prism.js"></script>
+  </body>
+</html>
