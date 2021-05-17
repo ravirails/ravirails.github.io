@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DRYing rails controllers using meta programming</title>
+
+    <meta name="description" content="Don’t Repeat Yourself (DRY) is a software development principle, the main aim of which is to reduce repetition of code. There is a misconception among many developers that they define the DRY term wrongly. They believe that reduced code is known as DRY code but hold on. DRY doesn&#39;t tell you to">
+    <meta name="keywords" content="rails and metaprogrammng, dry controllers, rails dry controllers, drying controllers using metaprogramming">
+    <meta name="twitter:site_name" content="AI - Academy">
+    <meta name="twitter:site" content="AI - Academy">
+    <meta name="twitter:card" content="DRYing rails controllers using metaprogramming">
+    <meta name="twitter:description" content="Don’t Repeat Yourself (DRY) is a software development principle, the main aim of which is to reduce repetition of code. There is a misconception among many developers that they define the DRY term wrongly. They believe that reduced code is known as DRY code but hold on. DRY doesn&#39;t tell you to reduce the code, it says to reduce the multiple appearance of same code.">
+    <meta name="twitter:image" content="https://appsimpact-academy.s3.us-east-2.amazonaws.com/exxtryiwwpkhaik0r2l5kmo43oha?response-content-disposition=inline%3B%20filename%3D%22DRYing-rails-controllers-using-metaprogramming.png%22%3B%20filename%2A%3DUTF-8%27%27DRYing-rails-controllers-using-metaprogramming.png&amp;response-content-type=image%2Fpng&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATUMRTR7EGHSSOYXU%2F20210517%2Fus-east-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210517T080058Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=74b90b21a1b5ac748505245db7a26811b3a7d1b40e38ee1366b7bef2c0091613">
+    <meta property="og:url" content="https://ai-academy.herokuapp.com/blogs/drying-rails-controllers-using-metaprogramming">
+    <meta property="og:site_name" content="AI - Academy">
+    <meta property="og:title" content="DRYing rails controllers using metaprogramming">
+    <meta property="og:image" content="https://appsimpact-academy.s3.us-east-2.amazonaws.com/exxtryiwwpkhaik0r2l5kmo43oha?response-content-disposition=inline%3B%20filename%3D%22DRYing-rails-controllers-using-metaprogramming.png%22%3B%20filename%2A%3DUTF-8%27%27DRYing-rails-controllers-using-metaprogramming.png&amp;response-content-type=image%2Fpng&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATUMRTR7EGHSSOYXU%2F20210517%2Fus-east-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210517T080058Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=74b90b21a1b5ac748505245db7a26811b3a7d1b40e38ee1366b7bef2c0091613">
+    <meta property="og:description" content="Don’t Repeat Yourself (DRY) is a software development principle, the main aim of which is to reduce repetition of code. There is a misconception among many developers that they define the DRY term wrongly. They believe that reduced code is known as DRY code but hold on. DRY doesn&#39;t tell you to reduce the code, it says to reduce the multiple appearance of same code.">
+    <meta property="og:keywords" content="rails and metaprogrammng">
+    <meta property="og:keywords" content="dry controllers">
+    <meta property="og:keywords" content="rails dry controllers">
+    <meta property="og:keywords" content="Drying controllers using metaprogramming">
+    <meta property="og:type" content="website">
+    <meta name="image" content="https://appsimpact-academy.s3.us-east-2.amazonaws.com/exxtryiwwpkhaik0r2l5kmo43oha?response-content-disposition=inline%3B%20filename%3D%22DRYing-rails-controllers-using-metaprogramming.png%22%3B%20filename%2A%3DUTF-8%27%27DRYing-rails-controllers-using-metaprogramming.png&amp;response-content-type=image%2Fpng&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATUMRTR7EGHSSOYXU%2F20210517%2Fus-east-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210517T080058Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=74b90b21a1b5ac748505245db7a26811b3a7d1b40e38ee1366b7bef2c0091613">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="plugins/prismjs/prism.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-purple">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">APPSIMPACT Academy</a>
+        <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="posts.html">Posts</a>
+          </li>
+        </ul> -->
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9 col-md-12 mx-lg-auto">
+          <h1 class="display-6 mt-5 mb-5">DRYing rails controllers using meta programming</h1>
+
+          <div class="mt-4 mb-4">
+            <img src="images/blogs/DRYing-rails-controllers-using-metaprogramming.png" class="img-fluid">
+          </div>
+
+          <div class="article-content">
+            <p class="lead font-weight-400">Don’t Repeat Yourself (DRY) is a software development principle, the main aim of which is to reduce repetition of code. There is a misconception among many developers that they define the DRY term wrongly. They believe that reduced code is known as DRY code but hold on. DRY doesn't tell you to reduce the code, it says to reduce the multiple appearance of same code.</p>
+
+            <p class="lead font-weight-400">Before going to deep into this article I assume that you are aware about the advantages of DRY and importance of following this principle. I am also assuming you have basic knowledge about metaprogramming and the power of metaprogramming.</p>
+
+            <p class="lead font-weight-400">Now suppose we have an application where we have multiple controllers which are doing same funcationality like simple C-R-U-D (Create-Read-Update-Delete) operations. Then what is the best way to do things faster - Scaffolding right? Yes!</p>
+
+
+            <div id="step-1" class="mt-3">
+              <p class="lead font-weight-400">Scaffolding is the good way to create such controllers to develop quickly. For example look at the following example:</p>
+              <pre>
+                <code class="language-shell">
+                  <span>rails generate scaffold book name:string description:text image_url:string price:integer isbn:string</span>
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400 mt-4">When you run this command you will get a controller named as <code class="language-ruby">books_controller</code>. This will look like following:</p>
+              <pre>
+                <code class="language-ruby">
+                  <span>
+                    class BooksController < ApplicationController
+                      before_action :set_book, only: [:show, :edit, :update, :destroy]
+
+                      # GET /books
+                      # GET /books.json
+                      def index
+                        @books = Book.all
+                      end
+
+                      # GET /books/1
+                      # GET /books/1.json
+                      def show
+                      end
+
+                      # GET /books/new
+                      def new
+                        @book = Book.new
+                      end
+
+                      # GET /books/1/edit
+                      def edit
+                      end
+
+                      # POST /books
+                      # POST /books.json
+                      def create
+                        @book = Book.new(book_params)
+
+                        respond_to do |format|
+                          if @book.save
+                            format.html { redirect_to @book, notice: 'Book was successfully created.' }
+                            format.json { render :show, status: :created, location: @book }
+                          else
+                            format.html { render :new }
+                            format.json { render json: @book.errors, status: :unprocessable_entity }
+                          end
+                        end
+                      end
+
+                      # PATCH/PUT /books/1
+                      # PATCH/PUT /books/1.json
+                      def update
+                        respond_to do |format|
+                          if @book.update(book_params)
+                            format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+                            format.json { render :show, status: :ok, location: @book }
+                          else
+                            format.html { render :edit }
+                            format.json { render json: @book.errors, status: :unprocessable_entity }
+                          end
+                        end
+                      end
+
+                      # DELETE /books/1
+                      # DELETE /books/1.json
+                      def destroy
+                        @book.destroy
+                        respond_to do |format|
+                          format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+                          format.json { head :no_content }
+                        end
+                      end
+
+                      private
+                        # Use callbacks to share common setup or constraints between actions.
+                        def set_book
+                          @book = Book.find(params[:id])
+                        end
+
+                        # Never trust parameters from the scary internet, only allow the white list through.
+                        def book_params
+                          params.require(:book).permit(:name, :description, :image_url, :price, :isbn)
+                        end
+                    end
+                  </span>
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400 mt-4">Now suppose you need another controllers by which you need to perform only basic C-R-U-D operations then you need to run the same scaffold generator(after changing your model and attributes name) and you get the similar resource controller. Though this is fast to build the functionalities but as a professional Ruby on Rails developer (If you really love the magic of Ruby) this is not a good approach because in all such controllers you are using same code(except your resource name).</p>
+
+              <p class="lead font-weight-400">Now this is better to write DRY controllers using some metaprogramming techniques. Believe me I am not using any advanced meta programming example here, instead I am just using only few basic methods to keep this as simple as possible.</p>
+
+              <p class="lead font-weight-400">Enough talking lets use a practical example. We will do this by creating a concern and then including this concern into all our common controllers. Go to app/controllers/concerns folder into your project.</p>
+
+              <p class="lead font-weight-400 mb-4">Now create a file and name as <code class="language-ruby">common_crud.rb</code> and put the following code inside this:</p>
+
+              <pre>
+                <code class="language-ruby">
+                  <span>
+                    module Concerns::CommonCrud
+                      extend ActiveSupport::Concern
+                      included do
+
+                        before_action :set_resource, only: %w[show edit update destroy]
+
+                        def index
+                          results = resource_class.all
+                          instance_variable_set("@#{plural_resource_name}", results)
+                          respond_to do |format|
+                            format.html
+                          end
+                        end
+
+                        def new
+                          set_resource(resource_class.new)
+                        end
+
+                        def edit; end
+
+                        def show; end
+
+                        def create
+                          set_resource(resource_class.new(resource_params))
+                          if get_resource.save
+                            redirect_to send("#{plural_resource_name}_path"), flash: { success: "#{resource_name.titleize} has been created successfully." }
+                          else
+                            render :new
+                          end
+                        end
+
+                        def update
+                          if get_resource.update(resource_params)
+                            redirect_to send("#{plural_resource_name}_path"), flash: { success: "#{resource_name.titleize} has been updated successfully." }
+                          else
+                            render :edit
+                          end
+                        end
+
+                        def destroy
+                          if get_resource && get_resource.destroy
+                            redirect_to send("#{plural_resource_name}_path"), flash: { success: "#{resource_name.titleize} has been deleted successfully." }
+                          else
+                            redirect_to send("#{plural_resource_name}_path"), flash: { error: "No #{resource_name} found!" }
+                          end
+                        end
+
+                        private
+
+                        def resource_class
+                          @resource_class ||= resource_name.classify.constantize
+                        end
+
+                        def resource_name
+                          @resource_name ||= self.controller_name.singularize
+                        end
+
+                        def plural_resource_name
+                          resource_name.pluralize
+                        end
+
+                        def resource_params
+                          self.send("#{resource_name}_params")
+                        end
+
+                        def set_resource(resource=nil)
+                          resource ||= resource_class.find(params[:id])
+                          instance_variable_set("@#{resource_name}", resource)
+                        end
+
+                        def get_resource
+                          instance_variable_get("@#{resource_name}")
+                        end
+
+                      end
+                    end
+                  </span>
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400 mt-4 mb-4">Now its time to include this module into your books controller and after doing this the <code class="language-ruby">app/controllers/books_controller.rb</code> should look like like this:</p>
+
+              <pre>
+                <code class="language-ruby">
+                  <span>
+                    class BooksController < ApplicationController
+                      include Concerns::CommonCrud
+
+                      private
+
+                        def book_params
+                          params.require(:book).permit!
+                        end
+                    end
+                  </span>
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400 mt-4 mb-4">Here we go! But hold on! These steps will only work fine for all rails versoions prior to rails 6. We have tried this article with rails 4.x, 5.x and works fine. But if you use this blog as it is for rails 6 too, you will get some name error, like this:</p>
+
+              <pre>
+                <code class="language-ruby">
+                  <span>NameError (uninitialized constant BooksController::Concerns)</span>
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400 mt-4 mb-4">This is because in rails 6 we can not use concerns as namespace. So for rails 6 you need to remove namespace from our <code class="language-ruby">common_crud.rb</code> concern. So just need to do following things:</p>
+
+              <pre>
+                <code class="language-ruby">
+                  <span>
+                    module Concerns::CommonCrud
+
+                    # with 
+
+                    module CommonCrud
+
+                    # and inside books_controller.rb replace
+
+                    include Concerns::CommonCrud
+
+                    # with 
+
+                    include CommonCrud
+                  </span>
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400 mt-4">And you are good to go. Cheers!!!</p>
+
+              <p class="lead font-weight-400">You can do the same for all your controllers and whenever you need to customize an action you can simply override that action. You can observe the difference between both ways: default scaffold controllers and implementing controllers using DRY standards.</p>
+
+              <p class="lead font-weight-400">I hope you like this article.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="blog-footer mt-5">
+      <p>APPSIMPACT Academy@2021</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    <script src="plugins/prismjs/prism.js"></script>
+  </body>
+</html>

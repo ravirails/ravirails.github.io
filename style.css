@@ -4,3 +4,32 @@ body {
 .font-weight-400 {
   font-weight: 400 !important;
 }
+.bg-purple {
+  background-color: #c780fe !important;
+}
+.blog-footer {
+  padding: 2.5rem 0;
+  color: #fff;
+  text-align: center;
+  background-color: #c780fe;
+  border-top: .05rem solid #c780fe;
+}
+.blog-footer a {
+  color:#fff;
+}
+.btn-purple {
+  color: #fff;
+  background-color: #a665d8;
+  border-color: #a665d8;
+}
+.btn-purple:hover {
+  color: #fff;
+  background-color: #a665d8;
+  border-color: #a665d8;
+}
+.btn-check:focus + .btn-purple, .btn-purple:focus {
+  color: #fff;
+  background-color: #a665d8;
+  border-color: #a665d8;
+  box-shadow: 0 0 0 0.25rem #c780fe;
+}
