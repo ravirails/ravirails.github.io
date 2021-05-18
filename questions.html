@@ -354,7 +354,6 @@
                 </div>
               </div>
             </div>
-
             <div class="accordion-item mb-4 border-btm-custom">
               <h2 class="accordion-header" id="questionEight">
                 <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionEight" aria-expanded="true" aria-controls="aiQuestionEight">
@@ -392,7 +391,6 @@
                 </div>
               </div>
             </div>
-
             <div class="accordion-item mb-4 border-btm-custom">
               <h2 class="accordion-header" id="questionNine">
                 <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionNine" aria-expanded="true" aria-controls="aiQuestionNine">
@@ -438,7 +436,6 @@
                 </div>
               </div>
             </div>
-
             <div class="accordion-item mb-4 border-btm-custom">
               <h2 class="accordion-header" id="questionTen">
                 <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionTen" aria-expanded="true" aria-controls="aiQuestionTen">
@@ -484,7 +481,6 @@
                 </div>
               </div>
             </div>
-
             <div class="accordion-item mb-4 border-btm-custom">
               <h2 class="accordion-header" id="questionEleven">
                 <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionEleven" aria-expanded="true" aria-controls="aiQuestionEleven">
@@ -625,8 +621,7 @@
                 </div>
               </div>
             </div>
-
-            <div class="accordion-item mb-4">
+            <div class="accordion-item mb-4 border-btm-custom">
               <h2 class="accordion-header" id="questionTwelve">
                 <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionTwelve" aria-expanded="true" aria-controls="aiQuestionTwelve">
                   What is compact method for array in Ruby? How you can implement this from scratch?
@@ -672,6 +667,45 @@
 
                   <p class="lead font-weight-400">Cheers!!!</p>
 
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item mb-4 border-btm-custom">
+              <h2 class="accordion-header" id="questionThirteen">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionThirteen" aria-expanded="true" aria-controls="aiQuestionThirteen">
+                  What is MVC Architecture of Rails? Explain.
+                </button>
+              </h2>
+              <div id="aiQuestionThirteen" class="accordion-collapse collapse" aria-labelledby="questionThirteen" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400 mb-4">MVC(Model-View-Controller) is a software design pattern and this is conventionally followed by Rails. Let's briefly define each component of MVC.</p>
+
+                  <img src="images/blogs/railsMVC.png" class="img-fluid">
+
+                  <p class="lead font-weight-400 mb-4 mt-4"><strong>Model:</strong> Model is the layer of the system responsible for representing business data and logic. In Rails models facilitates the creation and use of business objects whose data requires persistent storage to a database.</p>
+                  
+                  <p class="lead font-weight-400 mb-4"><strong>View:</strong> This represents the presentation layer in MVC pattern. Model data is populated on views so that users can see this data. View is also used to make requests for data, to perform certain actions like CRUD by users. In Rails whenever a user perform any action on view or make a request to retrive or submit data, this is first goes to controller via rails router and then appropriate controller gets loaded and then controller serves the requested actions.</p>
+
+                  <p class="lead font-weight-400 mb-4"><strong>Controller:</strong> Controller works as the mediater between Model and View, it makes the model data available to the view so it can display that data to the user, and it saves or updates user data to the model. Once a request from the view has been made by users, this is first received by the router and after the router has determined which controller to use for a request, the controller is responsible for making sense of the request, and producing the appropriate output.</p>
+
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item mb-4">
+              <h2 class="accordion-header" id="questionFourteen">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionFourteen" aria-expanded="true" aria-controls="aiQuestionFourteen">
+                  What are the possible ways to create HTTP response by controller?
+                </button>
+              </h2>
+              <div id="aiQuestionFourteen" class="accordion-collapse collapse" aria-labelledby="questionFourteen" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400">In Rails, a controller has three possible ways to create HTTP response:</p>
+
+                  <ul class="lead font-weight-400">
+                    <li>Call <code>render</code> to create a full response to send back to the browser. This is mainly used while retriving information for any single orcollection of objects. This can be also be used for static pages as well.</li>
+                    <li>Call <code>redirect_to</code> to send an HTTP redirect status code to the browser. This is mainly used while submitting data for create or update a record or delete a record from database.</li>
+                    <li>Call <code>head</code> to create a response consisting solely of HTTP headers to send back to the browser.</li>
+                  </ul>
                 </div>
               </div>
             </div>
