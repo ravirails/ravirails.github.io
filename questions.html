@@ -261,7 +261,7 @@
                 </div>
               </div>
             </div>
-            <div class="accordion-item mb-4">
+            <div class="accordion-item mb-4 border-btm-custom">
               <h2 class="accordion-header" id="questionSeven">
                 <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionSeven" aria-expanded="true" aria-controls="aiQuestionSeven">
                   What is the use of attr_reader, attr_writer and attr_accessor in Ruby?
@@ -351,6 +351,327 @@
                   </pre>
 
                   <p class="lead font-weight-400 mt-4">Now the main confusion is that when we should use which of these three. So the answer is very simple that if you only need to read the value of attributes you need to use <code class="language-ruby">attr_reader</code> and when you need to change the value of attribute you must use <code class="language-ruby">attr_writer</code>. But when you need both you should use <code class="language-ruby">attr_accessor</code>.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item mb-4 border-btm-custom">
+              <h2 class="accordion-header" id="questionEight">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionEight" aria-expanded="true" aria-controls="aiQuestionEight">
+                  What is a module? Can you tell me the difference between classes and modules?
+                </button>
+              </h2>
+              <div id="aiQuestionEight" class="accordion-collapse collapse" aria-labelledby="questionEight" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400 mb-4">Modules are a way of grouping together methods, classes, and constants. Modules give you two major benefits. Modules provide a namespace and prevent name clashes and they also implement the mixin facility.</p>
+                  <p class="lead font-weight-400 mb-4">The main difference between classes and modules is that classes provide more ownership rather than objects. A class in Ruby can be instantiated but a standard module could not. Modules can used inside classes. Look atthe following example:</p>
+                  <pre>
+                    <code class="language-ruby">
+                      module Greetings
+                        def welcome
+                          puts 'Welcome to Ruby world.'
+                        end
+
+                        def hello
+                          puts 'Hello! I am module.'
+                        end
+                      end
+
+                      class Example
+                        include Greetings
+                      end
+
+                      obj = Example.new
+
+                      obj.welcome
+                      => "Welcome to Ruby world."
+                      obj.hello
+                      => "Hello! I am module."
+                    </code>
+                  </pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item mb-4 border-btm-custom">
+              <h2 class="accordion-header" id="questionNine">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionNine" aria-expanded="true" aria-controls="aiQuestionNine">
+                  In Ruby how many ways to invoke a method in Ruby? Illustrate with example.
+                </button>
+              </h2>
+              <div id="aiQuestionNine" class="accordion-collapse collapse" aria-labelledby="questionNine" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400 mb-4">There are four ways to invoke a method in Ruby.</p>
+                  <ul class="lead font-weight-400 mb-4">
+                    <li>Using dot operator(.)</li>
+                    <li>Using send</li>
+                    <li>Using method(method_name).call</li>
+                    <li>Using double colon operator(::)</li>
+                  </ul>
+                  <p class="lead font-weight-400 mb-4">Let's see following example:</p>
+                  <pre>
+                    <code class="language-ruby">
+                      arr = Array.new
+                      => []
+
+                      arr.object_id
+                      => 22020
+
+                      arr.send(:object_id)
+                      => 22020
+
+                      arr.send('object_id')
+                      => 22020
+
+                      arr.method(:object_id).call
+                      => 22020
+
+                      arr.method('object_id').call
+                      => 22020
+
+                      arr::object_id
+                      => 22020
+                    </code>
+                  </pre>
+
+                  <p class="lead font-weight-400 mb-4">You can invoke any other method just like above on objects of any class.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item mb-4 border-btm-custom">
+              <h2 class="accordion-header" id="questionTen">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionTen" aria-expanded="true" aria-controls="aiQuestionTen">
+                  What do you mean by self in Ruby?
+                </button>
+              </h2>
+              <div id="aiQuestionTen" class="accordion-collapse collapse" aria-labelledby="questionTen" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400"><code class="language-ruby">self</code> is the keyword in Ruby that gives you the access to the current object. self can also be used for defining class level methods.</p>
+                  <p class="lead font-weight-400 mb-4">Look at the example below:</p>
+                  <pre>
+                    <code class="language-ruby">
+                      class Fish
+                        def display_self
+                          puts self
+                        end
+                      end
+
+                      Fish.new.display_self
+                      => #<Fish:0x000055cb8bc3b778>
+
+                      class Fish
+                        # using self for accessing current object
+                        def display_self
+                          puts self
+                        end
+
+                        # using self for defining class methods
+                        def self.display_self
+                          puts self
+                        end
+                      end
+
+                      Fish.new.display_self
+                      => #<Fish:0x000055cb8bc3b778>
+
+                      Fish.display_self
+                      => Fish
+                    </code>
+                  </pre>
+
+                  <p class="lead font-weight-400"><code class="language-ruby">self</code> is also known as default receiver of method calls.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item mb-4 border-btm-custom">
+              <h2 class="accordion-header" id="questionEleven">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionEleven" aria-expanded="true" aria-controls="aiQuestionEleven">
+                  How would you create getter and setter methods in Ruby?
+                </button>
+              </h2>
+              <div id="aiQuestionEleven" class="accordion-collapse collapse" aria-labelledby="questionEleven" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400 mb-4">Getter methods are used to retrieve values of instance variables of an object. It is common practice to have the getter method’s name match the instance variable’s name. Below is the example of creating a getter method in Ruby.</p>
+                  <pre>
+                    <code class="language-ruby">
+                      class Example
+                        # initializing the name instance variable
+                        def initialize(name)
+                          @name = name
+                        end
+
+                        # getter method
+                        def name
+                          @name
+                        end
+                      end
+
+                      obj = Example.new('Lorem Ipsum')
+                      puts obj.name
+                      => "Lorem Ipsum"
+                    </code>
+                  </pre>
+
+                  <p class="lead font-weight-400 mt-4">Setter methods are used to change/write the value of instance variables of an object. Below is the example of creating a setter method in Ruby.</p>
+                  <pre>
+                    <code class="language-ruby">
+                      class Example
+                        # initializing the name instance variable
+                        def initialize(name)
+                          @name = name
+                        end
+
+                        # setter method
+                        def name=(value)
+                          @name = value
+                        end
+                      end
+
+                      obj = Example.new('Lorem Ipsum')
+                      obj.name = 'Another Name'
+                    </code>
+                  </pre>
+
+                  <h1 class="mt-4 mb-2">Putting it all together</h1>
+
+                  <pre>
+                    <code class="language-ruby">
+                      class Example
+                        # initializing the name instance variable
+                        def initialize(name)
+                          @name = name
+                        end
+
+                        # getter method
+                        def name
+                          @name
+                        end
+
+                        # setter method
+                        def name=(value)
+                          @name = value
+                        end
+                      end
+
+                      obj = Example.new('Lorem Ipsum')
+                      obj.name = 'Another Name'
+                      puts obj.name
+                      => "Another Name"
+                    </code>
+                  </pre>
+
+                  <h1 class="mt-4 mb-2">Things to notice</h1>
+
+                  <p class="lead font-weight-400">Instead of writing getter and setter method separetly you can also use ruby keywords <code class="language-ruby">attr_reader</code>, <code class="language-ruby">attr_writer</code> for getting functions of getter and setter methods. <code class="language-ruby">attr_reader</code> will work as <strong>getter</strong> method and <code class="language-ruby">attr_writer</code> will work as <strong>setter</strong> method. There is one more alternative to use more shorter form that is <code class="language-ruby">attr_accessor</code>. If you use this this will work as both getter ans setter.</p>
+
+                  <p class="lead font-weight-400 mb-4">Let's have a look:</p>
+
+                  <pre>
+                    <code class="language-ruby">
+                      class Example
+                        attr_reader :name
+                        
+                        def initialize(name)
+                          @name = name
+                        end
+                      end
+
+                      obj = Example.new('Lorem Ipsum')
+                      puts obj.name
+                      => "Lorem Ipsum"
+                    </code>
+                  </pre>
+
+                  <p class="lead font-weight-400 mt-4">This will work same as the class mentioned for getter method example.</p>
+
+                  <pre>
+                    <code class="language-ruby">
+                      class Example
+                        attr_writer :name
+                        
+                        def initialize(name)
+                          @name = name
+                        end
+                      end
+
+                      obj = Example.new('Lorem Ipsum')
+                      obj.name = 'Another Name'
+                    </code>
+                  </pre>
+
+                  <p class="lead font-weight-400 mt-4 mb-4">This will work same as the class mentioned for setter method example.</p>
+
+                  <pre>
+                    <code class="language-ruby">
+                      class Example
+                        attr_accessor :name
+                        
+                        def initialize(name)
+                          @name = name
+                        end
+                      end
+
+                      obj = Example.new('Lorem Ipsum')
+                      obj.name = 'Another Name'
+                      puts obj.name
+                      => "Another Name"
+                    </code>
+                  </pre>
+
+                  <p class="lead font-weight-400 mt-4">This will work same as the class mentioned for both getter and setter example.</p>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item mb-4">
+              <h2 class="accordion-header" id="questionTwelve">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionTwelve" aria-expanded="true" aria-controls="aiQuestionTwelve">
+                  What is compact method for array in Ruby? How you can implement this from scratch?
+                </button>
+              </h2>
+              <div id="aiQuestionTwelve" class="accordion-collapse collapse" aria-labelledby="questionTwelve" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400 mb-4"><strong>Compact</strong> will remove <code class="language-ruby">nil</code> elements from array if there is any. Look at the following example:</p>
+                  <pre>
+                    <code class="language-ruby">
+                      arr = [1, 2, 3, nil, 4, 5, nil, 6, 7, 8, nil]
+                    </code>
+                  </pre>
+
+                  <p class="lead font-weight-400 mt-4 mb-4">This array has three <code class="language-ruby">nil</code> elements. Now see the result of calling <strong>compact</strong> method on this array, you will get following example:</p>
+
+                  <pre>
+                    <code class="language-ruby">
+                      arr = [1, 2, 3, nil, 4, 5, nil, 6, 7, 8, nil]
+                      arr.compact
+                      => [1, 2, 3, 4, 5, 6, 7, 8]
+                    </code>
+                  </pre>
+
+                  <p class="lead font-weight-400 mt-4 mb-4">Now the task for you is to create a method which should return the same output as the <strong>compact</strong> method returns.</p>
+
+                  <pre>
+                    <code class="language-ruby">
+                      arr = [1, 2, 3, nil, 4, 5, nil, 6, 7, 8, nil]
+
+                      def custom_compact(arr)
+                        temp_arr = []
+                        arr.map {|i| temp_arr << i unless i.nil? }
+                        temp_arr
+                      end
+
+                      custom_compact(arr)
+                      => [1, 2, 3, 4, 5, 6, 7, 8]
+                    </code>
+                  </pre>
+
+                  <p class="lead font-weight-400 mt-4">This is how you can create your own compact method for removing nil elements from any given array. There are so many in built array methods which you might be asked during interview so you must try such logical things.</p>
+
+                  <p class="lead font-weight-400">Cheers!!!</p>
+
                 </div>
               </div>
             </div>
