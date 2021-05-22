@@ -7,8 +7,17 @@ body {
 .font-weight-500 {
   font-weight: 500 !important;
 }
+.font-weight-900 {
+  font-weight: 900 !important;
+}
 .font-size-145 {
   font-size: 1.45rem !important;
+}
+.font-size-160 {
+  font-size: 1.60rem !important;
+}
+.font-underline {
+  text-decoration: underline;
 }
 .bg-purple {
   background-color: #c780fe !important;
