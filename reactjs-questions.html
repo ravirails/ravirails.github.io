@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>APPSIMPACT ACADEMY Questions</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="plugins/prismjs/prism.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-purple">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">APPSIMPACT Academy</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="ruby-questions.html">Ruby on Rails</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="reactjs-questions.html">React JS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="work_samples.html">Work Samples</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row mt-5 mb-5">
+        <div class="col-lg-9 col-md-12 col-12 col-sm-12 mx-lg-auto">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item mb-4 border-btm-custom">
+              <h2 class="accordion-header" id="questionOne">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionOne" aria-expanded="true" aria-controls="aiQuestionOne">
+                  How to create a new react application?
+                </button>
+              </h2>
+              <div id="aiQuestionOne" class="accordion-collapse collapse" aria-labelledby="questionOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400">You must have the latest version of node.js and npm installed on your machine. If it is then you have to run following steps:</p>
+
+                  <ul class="lead font-weight-400">
+                    <li><code>npm install -g create-react-app</code></li>
+                    <li><code>npx create-react-app react-demo-app</code></li>
+                    <li>cd react-demo-app</li>
+                    <li><code>yarn start</code></li>
+                    <li>Open your browser at <a href="http://localhost:3000">http://localhost:3000</a></li>
+                  </ul>
+                  <p class="lead font-weight-400">And you will see the running react app on your browser.</p> 
+                  <p class="lead font-weight-400"><strong>NOTE:</strong> I have mentioned and tested these steps for <strong>ubuntu 18.04</strong>. Depending on your OS and its version the steps might be different.</p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item mb-4 border-btm-custom">
+              <h2 class="accordion-header" id="questionTwo">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionTwo" aria-expanded="false" aria-controls="aiQuestionTwo">
+                  What are components in React?
+                </button>
+              </h2>
+              <div id="aiQuestionTwo" class="accordion-collapse collapse" aria-labelledby="questionTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400">Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen.
+                  Components let you split the UI into independent, reusable pieces, and think about each piece in isolation.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item mb-4 border-btm-custom">
+              <h2 class="accordion-header" id="questionThree">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionThree" aria-expanded="false" aria-controls="aiQuestionThree">
+                  What are the main aspects of components?
+                </button>
+              </h2>
+              <div id="aiQuestionThree" class="accordion-collapse collapse" aria-labelledby="questionThree" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <ul class="lead font-weight-400">
+                    <li>Reusability</li>
+                    <li>Separation of concerns</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item mb-4 border-btm-custom">
+              <h2 class="accordion-header" id="questionFour">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionFour" aria-expanded="true" aria-controls="aiQuestionFour">
+                  What are props in React?
+                </button>
+              </h2>
+              <div id="aiQuestionFour" class="accordion-collapse collapse" aria-labelledby="questionFour" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400 mb-4">Props are arguments passed into React components. Props are like function arguments in JavaScript and attributes in HTML. Props are passed to components via HTML attributes.</p>
+
+                  <p class="lead font-weight-400 mb-4">For example here we are using props as arguments for the Person component. React components can be treated as functions in javascript:</p>
+
+                  <pre>
+                    <code class="language-javascript">
+                      function Person(props) {
+                        return(
+                          <xmp>
+                            <div className="person-card">
+                              <h1 className="person-title">My Name is {props.name}</h1>
+                              <p>I am {props.age} years old.</p>
+                              <p>I want to learn <span className="persone-course">{props.course}</span></p>
+                            </div>
+                          </xmp>
+                        )
+                      }
+                      export default Person;
+                    </code>
+                  </pre>
+                  <p class="lead font-weight-400 mt-4">And by following way we can provide props to a react component:</p>
+                  <pre>
+                    <code class="language-javascript">
+                      <xmp>
+                        <Person name="Ravi Singh" age="30" course="React Js" />
+                      </xmp>
+                    </code>
+                  </pre>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item mb-4 border-btm-custom">
+              <h2 class="accordion-header" id="questionFive">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionFive" aria-expanded="true" aria-controls="aiQuestionFive">
+                  What is State in ReactJs?
+                </button>
+              </h2>
+              <div id="aiQuestionFive" class="accordion-collapse collapse" aria-labelledby="questionFive" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400">React components have a built-in state object. The state object is where you store property values that belong to the component. When the state object changes, the component re-renders.</p>
+                  <p class="lead font-weight-400">Since state is managed within the components, hence this can be considered as variables declared within a function.</p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item mb-4 border-btm-custom">
+              <h2 class="accordion-header" id="questionSix">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionSix" aria-expanded="true" aria-controls="aiQuestionSix">
+                  What is the difference between stateful and stateless components in ReactJs?
+                </button>
+              </h2>
+              <div id="aiQuestionSix" class="accordion-collapse collapse" aria-labelledby="questionSix" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400 mb-4">Stateful and stateless components have many different names. They are also known as:</p>
+                  <ul class="lead font-weight-400 mb-4">
+                    <li>Container vs Presentational components</li>
+                    <li>Smart vs Dumb components</li>
+                  </ul>
+                  <p class="lead font-weight-400 mb-4">The literal difference is that one has state, and the other doesn’t. That means the stateful components are keeping track of changing data, while stateless components print out what is given to them via props, or they always render the same thing.</p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item mb-4 border-btm-custom">
+              <h2 class="accordion-header" id="questionSeven">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionSeven" aria-expanded="true" aria-controls="aiQuestionSeven">
+                  What are keys in React and why are they important?                
+                </button>
+              </h2>
+              <div id="aiQuestionSeven" class="accordion-collapse collapse" aria-labelledby="questionSeven" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400">A Key is a special string attribute you need to include when creating lists of elements. Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identity.</p>
+                  <p class="lead font-weight-400">The best way to pick a key is to use a string that uniquely identifies a list item among its siblings. Most often you would use IDs from your data as keys.</p>
+                  <p class="lead font-weight-400">When you don’t have stable IDs for rendered items, we can use the item index as a key as a last resort. But using an item index as keys is not recommended because the order of items may change. This can negatively impact performance and may cause issues with component state.</p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item mb-4 border-btm-custom">
+              <h2 class="accordion-header" id="questionEight">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionEight" aria-expanded="true" aria-controls="aiQuestionEight">
+                  What are Hooks in React?
+                </button>
+              </h2>
+              <div id="aiQuestionEight" class="accordion-collapse collapse" aria-labelledby="questionEight" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400">Hooks are a new introduction from React 16.8. Hooks let you use state and other React features without writing a class.</p>
+                  <ul class="lead font-weight-400">
+                    <li>Hooks allow you to reuse stateful logic without changing your component hierarchy.</li>
+                    <li>Hooks let you split one component into smaller functions based on what pieces are related (such as setting up a subscription or fetching data).</li>
+                    <li>Hooks let you use more of React’s features without classes.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item mb-4 border-btm-custom">
+              <h2 class="accordion-header" id="questionNine">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionNine" aria-expanded="true" aria-controls="aiQuestionNine">
+                  What are Fragments in React?
+                </button>
+              </h2>
+              <div id="aiQuestionNine" class="accordion-collapse collapse" aria-labelledby="questionNine" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400">Every React component requires a root element for returning multiple child elements. And this may cause very unstructured DOM.</p>
+
+                  <p class="lead font-weight-400">This is a common pattern in React for a component to return multiple elements. Fragments let you group a list of children without adding extra nodes to the DOM. Look at the following example: </p>
+                  <p class="lead font-weight-400 mb-4">Consider following snippet as return method into <code class="language-javascript">App.js</code></p>
+
+                  <pre>
+                    <code class="language-javascript">
+                      return(
+                        <xmp>
+                          <div>
+                            <SomeComponent />
+                          </div>
+                        </xmp>
+                      )
+                    </code>
+                  </pre>
+
+                  <p class="lead font-weight-400 mb-4">Consider following snippet as return method into <code class="language-javascript">SomeComponent.js</code></p>
+                  <pre>
+                    <code class="language-javascript">
+                      return(
+                        <xmp>
+                          <div>
+                            <SomeOtherComponent />
+                          </div>
+                        </xmp>
+                      )
+                    </code>
+                  </pre>
+
+                  <p class="lead font-weight-400 mb-4">Consider following snippet as return method into <code class="language-javascript">SomeOtherComponent.js</code></p>
+
+                  <pre>
+                    <code class="language-javascript">
+                      return(
+                        <xmp>
+                          <div>
+                            <h1>I am some other component!!</h1>
+                          </div>
+                        </xmp>
+                      )
+                    </code>
+                  </pre>
+
+                  <p class="lead font-weight-400 mb-4">Now in DOM the entire code will be reflected as following snippet:</p>
+
+                  <pre>
+                    <code class="language-javascript">
+                      <xmp>
+                        <div>
+                          <div>
+                            <div>
+                              <h1>I am some other component!!</h1>
+                            </div>
+                          </div>
+                        </div>
+                      </xmp>
+                    </code>
+                  </pre>
+                  <p class="lead font-weight-400 mt-4">You can clearly see some unuseful sequences of div's. This is the problem. But if we use like:</p>
+                  <p class="lead font-weight-400 mb-4">Consider following snippet as return method into <code class="language-javascript">App.js</code></p>
+                  <pre>
+                    <code class="language-javascript">
+                      return(
+                        <xmp>
+                          <React.Fragment>
+                            <SomeComponent />
+                          <React.Fragment>
+                        </xmp>
+                      )
+                    </code>
+                  </pre>
+
+                  <p class="lead font-weight-400 mb-4">Consider following snippet as return method into <code class="language-javascript">SomeComponent.js</code></p>
+                  <pre>
+                    <code class="language-javascript">
+                      return(
+                        <xmp>
+                          <React.Fragment>
+                            <SomeOtherComponent />
+                          </React.Fragment>
+                        </xmp>
+                      )
+                    </code>
+                  </pre>
+                  <p class="lead font-weight-400 mb-4 mt-4">And let the <code class="language-javascript">SomeOtherComponent.js</code> remain unchanged. Now the DOM will heve: </p>
+                  <pre>
+                    <code class="language-html">
+                      <xmp>
+                        <div>
+                          <h1>I am some other component!!</h1>
+                        </div>
+                      </xmp>
+                    </code>
+                  </pre>
+                  <p class="lead font-weight-400 mt-4">This is the advantage of using Fragments in React.</p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item mb-4">
+              <h2 class="accordion-header" id="questionTen">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionTen" aria-expanded="true" aria-controls="aiQuestionTen">
+                  What are the controlled and uncontrolled components in React.Js?
+                </button>
+              </h2>
+              <div id="aiQuestionTen" class="accordion-collapse collapse" aria-labelledby="questionTen" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400">You can understand this by creating a React component which renders a form. In a controlled component, form data is handled by a React component. The alternative is uncontrolled components, where form data is handled by the DOM itself.</p>
+                  <p class="lead font-weight-400 mb-4">Consider the following example:</p>
+                  <pre>
+                    <code class="language-jsx">
+                      import React, { useState } from "react";
+
+                      const UserForm = (props) => {
+                        const [userEmail, setUserEmail] = useState('');
+                        const [userName, setUserName] = useState('');
+
+                        render(
+                          <xmp>
+                            <React.Fragment>
+                              <form>
+                                <div className="form-group">
+                                  <label>Email: </label>
+                                  <input type="email" className="form-control form-control-lg" value={userEmail} />
+                                </div>
+                                <div className="form-group">
+                                  <label>Name: </label>
+                                  <input type="text" className="form-control form-control-lg" value={userName} />
+                                </div>
+                                <div className="form-group">
+                                  <button type="submit" className="btn btn-primary btn-lg">Submit</button>
+                                </div>
+                              </form>
+                            </React.Fragment>
+                          </xmp>
+                        )
+                      }
+                    </code>
+                  </pre>
+
+                  <p class="lead font-weight-400 mt-4">Suppose this is the component you have and now If you see this component form on browser then try to inspect the form and open your browser console. You will following error:</p>
+
+                  <pre>
+                    <code class="language-jsx">
+                      Warning: A component is changing an uncontrolled input to be controlled. This is likely caused by the value changing from undefined to a defined value, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://reactjs.org/link/controlled-components
+                    </code>
+                  </pre>
+                  <p class="lead font-weight-400 mt-4">Here your inputs are uncontrolled because they are using the component's state variables as values but when you write anything in the form fields nothing will change to the state because you have not handlled any change in form field here.</p>
+
+                  <p class="lead font-weight-400">You can remove this error by two ways:</p>
+
+                  <p class="lead font-weight-400">
+                    1. Rename all the value attributes as <code class="language-jsx">defaultValues</code>. For example: <br>
+                    <pre>
+                      <code class="language-jsx">
+                        <xmp>
+                          <input type="email" className="form-control form-control-lg" defaultValue={userEmail} />
+                        </xmp>
+                      </code>
+                    </pre>
+                    </p>
+                  <p class="lead font-weight-400">
+                    2. Add some change handlers to handle change in objects when you update the form field values.<br>
+                    <pre>
+                      <code class="language-jsx">
+                        <xmp>
+                          <input type="email" className="form-control form-control-lg" value={userEmail} onChange={emailChangeHandler} />
+                        </xmp>
+                      </code>
+                    </pre>
+                  </p>
+                  <p class="lead font-weight-400">
+                    and within the component define this <code class="language-jsx">emailChangeHandler</code> method: <br>
+                    <pre>
+                      <code class="language-jsx">
+                        const emailChangeHandler = (event) => {
+                          setUserEmail(event.target.value)
+                        }
+                      </code>
+                    </pre>
+                  </p>
+                  <p class="lead font-weight-400 mt-4 mb-4">Do the same for name field as well and you will not see this error in browser console. Finally your component should look like this:</p>
+                  <pre>
+                    <code class="language-jsx">
+                      import React, { useState } from "react";
+
+                      const UserForm = () => {
+                        const [userEmail, setUserEmail] = useState('');
+                        const [userName, setUserName] = useState('');
+
+                        const emailChangeHandler = (event) => {
+                          setUserEmail(event.target.value)
+                        }
+
+                        const nameChangeHandler = (event) => {
+                          setUserName(event.target.value)
+                        }
+
+                        render(
+                          <xmp>
+                            <React.Fragment>
+                              <form>
+                                <div className="form-group">
+                                  <label>Email: </label>
+                                  <input type="email" className="form-control form-control-lg" value={userEmail} onChange={emailChangeHandler} />
+                                </div>
+                                <div className="form-group">
+                                  <label>Name: </label>
+                                  <input type="text" className="form-control form-control-lg" value={userName} onChange={nameChangeHandler} />
+                                </div>
+                                <div className="form-group">
+                                  <button type="submit" className="btn btn-primary btn-lg">Submit</button>
+                                </div>
+                              </form>
+                            </React.Fragment>
+                          </xmp>
+                        )
+                      }
+                    </code>
+                  </pre>
+                  <p class="lead font-weight-400 mt-4">So here you can check the difference between controlled and uncontrolled components here. First one is uncontrolled component and last one is controlled component.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="blog-footer mt-5">
+      <p>APPSIMPACT Academy@2021</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    <script src="plugins/prismjs/prism.js"></script>
+  </body>
+</html>
