@@ -65,7 +65,7 @@
 
             <p class="lead font-weight-400">Since it's start Ruby on Rails is considered as one of the most productive web development framework. It makes development very fast and make this like a fun. That's why this getting more populer among web developers. But when it comes to performance and best practices few developer missed the most important tricks and that raise some concerns. In this blog I am going to share couple of things that you must notice if you are a Rails developer.</p>
 
-            <h2 class="font-weight-400">
+            <h2 class="font-weight-bold">
               1. Finding an object should handle the <code>not found exception</code>
             </h2>
 
@@ -104,7 +104,7 @@
               </pre>
             </div>
 
-            <h2 class="font-weight-400">
+            <h2 class="font-weight-bold mt-3">
               2. Avoid loading all objects into database at once
             </h2>
 
@@ -129,7 +129,64 @@
               </pre>
               <p class="lead font-weight-400 mt-4"><code>find_each</code> is a batch processing method which allow you to work with the records in batches, thereby this greatly reduce the memory consumption.</p>
               <p class="lead font-weight-400"><code>find_each</code> method uses <code>find_in_batches</code> with a default batch size of 1000 records.</p>
+
+              <h2 class="font-weight-bold mt-4">3. Avoid N+1 query problem</h2>
+              <p class="lead font-weight-400 mb-4">This query problem take place when there are associations. Consider the following example:</p>
+
+              <pre>
+                <code class="language-ruby">
+                  class Parent < ApplicationRecord
+                    has_many :children
+                  end
+
+                  class Child < ApplicationRecord
+                    belongs_to :parent
+                  end
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400 mb-4">Now if you want to load parent records and want to use associated child instances for getting some information then you may write code something like this:</p>
+
+              <pre>
+                <code class="language-ruby">
+                  parants = Parent.limit(10)
+
+                  parents.each do |parent|
+                    parent.children.each do |child|
+                      puts child.name
+                    end
+                  end
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400 mt-4">The number of queries executed by this code will be 1(for loading 10 parent records) + N(number of children for each parent). <strong>N + 1</strong> queries in total.</p>
+
+              <p class="lead font-weight-400 mb-4">But Rails has already provided solutions for avoiding such cases by using <strong>Eager Loading</strong>. By eager loading associations you can prevent N + 1 queries in your code. Look at the following snippet:</p>
+              <pre>
+                <code class="language-ruby">
+                  parents = Parent.includes(:children).limit(10)
+
+                  parents.each do |parent|
+                    parent.children.each do |child|
+                      puts child.name
+                    end
+                  end
+                </code>
+              </pre>
+
+              <p class="lead font-weight-400 mt-4">This code will execute just 2 queries, as opposed to N + 1 queries in the previous case. 1 for loading 10 parent records and 1 for loading children of parent.</p>
+
+              <h2 class="font-weight-bold mt-4">4. Avoid writing any secret information into code</h2>
+
+              <p class="lead font-weight-400">Many of the rails applications use the secret credentials like third party API keys(like Stripe, Google APIs, Sendgrid, Twilio, etc), tokens, server secrets like AWS, and many more. And you must prevent yourself by providing these kind of information directly into your code. Even if you are just doing testing and planning for removing this from code later. Don't do this.</p>
+
+              <p class="lead font-weight-400">There are various gems(like <code>figaro</code>, <code>dot-env</code>) which provides you the facility to store your secret variables or any other sensitive information as environment(ENV) variables. With the rails versions after <code>rails 5.2</code> or higher you can store your secrets into <code>config/credentials.yml.ync</code> user a <code>config/master.key</code>. </p>
+
+              <p class="lead font-weight-400">More important is once you separate your secrets into a secific file(mostly <code>application.yml</code>, <code>.env</code>, <code>secrets.yml</code>, <code>config/master.key</code>) then add these files into applications <code>.gitignore</code> file. </p>
+
+              <h2 class="font-weight-bold mt-4">Conclusion</h2>
               <p class="lead font-weight-400">These are some common practices and also very important when show your work to your clients as code samples. So keep following these practices. Because some clients/recruiters have great technical knowledge indepth and they can raise concern on bad practices.</p>
+
             </div>
           </div>
         </div>
