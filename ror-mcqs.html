@@ -630,6 +630,84 @@
 
             </div>
           </div>
+
+          <div class="card shadow mt-4">
+            <div class="card-body">
+              <h5>8. You have been given a model name <code>Article</code>, which has title and body attribute. There is also a title method in the Article model. Look at the below model snapshot:</h5>
+              <pre>
+                <code class="language-ruby">
+                  class Article < ApplicationRecord
+                    validates :title, :body, presence: true
+
+                    def title
+                      # Do something here for raising System Stack Error    
+                    end
+                  end
+                </code>
+              </pre>
+              <p class="lead font-weight-400 mt-4">Here I ask you to raise an Exception for <code class="language-ruby">SystemStackError: stack level too deep</code>. For this you have to write a line in title method.</p>
+
+              <p class="lead font-weight-400 mb-4">Which of following option(s) is corret for raising the exception. Apply that all.</p>
+
+              <div class="d-flex justify-content-start">
+                <div>
+                  <h5 class="mt-4 mx-1">A.</h5>
+                </div>
+                <div class="flex-fill">
+                  <pre>
+                    <code class="language-ruby">
+                      puts "#{self.name}"
+                    </code>
+                  </pre>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-start">
+                <div>
+                  <h5 class="mt-4 mx-1">B.</h5>
+                </div>
+                <div class="flex-fill">
+                  <pre>
+                    <code class="language-ruby">
+                      puts name
+                    </code>
+                  </pre>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-start">
+                <div>
+                  <h5 class="mt-4 mx-1">C.</h5>
+                </div>
+                <div class="flex-fill">
+                  <pre>
+                    <code class="language-ruby">
+                      puts "name"
+                    </code>
+                  </pre>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-start">
+                <div>
+                  <h5 class="mt-1 mx-1">D.</h5>
+                </div>
+                <div class="flex-fill">
+                  <p class="lead font-weight-400">Only A and B</p>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-start">
+                <div>
+                  <h5 class="mt-1 mx-1">E.</h5>
+                </div>
+                <div class="flex-fill">
+                  <p class="lead font-weight-400">All A, B, and C</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
