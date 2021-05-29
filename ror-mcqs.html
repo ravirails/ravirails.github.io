@@ -708,6 +708,79 @@
 
             </div>
           </div>
+
+          <div class="card shadow mt-4">
+            <div class="card-body">
+              <h5>9. Please look into the following model snapshot</h5>
+              <pre>
+                <code class="language-ruby">
+                  class User < ApplicationRecord
+                    validates :first_name, :last_name, :contact, :email, presence: true, on: :update 
+                  end
+                </code>
+              </pre>
+              <p class="lead font-weight-400 mt-4">For all the users values of <code>first_name</code>, <code>last_name</code>, <code>contact</code> fields are empty. I just want to update the value of the <code>email</code> field. But when I am trying to update email I am getting a validation error.</p>
+
+              <p class="lead font-weight-400 mb-4">Which of the following query(s) will be executed successfully. Select all that apply.</p>
+              <div class="d-flex justify-content-start">
+                <div>
+                  <h5 class="mt-4 mx-1">A.</h5>
+                </div>
+                <div class="flex-fill">
+                  <pre>
+                    <code class="language-ruby">
+                      @user = User.find(params[:id])
+                      @user.update(email: 'someemail@example.com').validate?(false)
+                    </code>
+                  </pre>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-start">
+                <div>
+                  <h5 class="mt-4 mx-1">B.</h5>
+                </div>
+                <div class="flex-fill">
+                  <pre>
+                    <code class="language-ruby">
+                      @user = User.find(params[:id])
+                      @user.update(email: 'someemail@example.com').validate(false)
+                    </code>
+                  </pre>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-start">
+                <div>
+                  <h5 class="mt-4 mx-1">C.</h5>
+                </div>
+                <div class="flex-fill">
+                  <pre>
+                    <code class="language-ruby">
+                      @user = User.find(params[:id])
+                      @user.update(email: 'someemail@example.com', validate: false)
+                    </code>
+                  </pre>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-start">
+                <div>
+                  <h5 class="mt-4 mx-1">D.</h5>
+                </div>
+                <div class="flex-fill">
+                  <pre>
+                    <code class="language-ruby">
+                      @user = User.find(params[:id])
+                      @user.email = 'someemail@example.com'
+                      @user.save(validate: false)
+                    </code>
+                  </pre>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
