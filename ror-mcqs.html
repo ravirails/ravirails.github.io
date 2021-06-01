@@ -781,6 +781,73 @@
 
             </div>
           </div>
+
+          <div class="card shadow mt-4">
+            <div class="card-body">
+              <h5>10. Consider the following association between <code>User</code> and <code>Note</code> model:</h5>
+              <pre>
+                <code class="language-ruby">
+                  class User < ApplicationRecord
+                    has_many :notes, dependent: :destroy
+                  end
+
+                  class Note < ApplicationRecord
+                    belongs :user
+                  end
+                </code>
+              </pre>
+              <p class="lead font-weight-400 mt-4 mb-4">Which of the following query will return only the users who have at least one note.</p>
+
+              <div class="d-flex justify-content-start">
+                <div>
+                  <h5 class="mt-4 mx-1">A.</h5>
+                </div>
+                <div class="flex-fill">
+                  <pre>
+                    <code class="language-ruby">
+                      User.includes(:notes)
+                    </code>
+                  </pre>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-start">
+                <div>
+                  <h5 class="mt-4 mx-1">B.</h5>
+                </div>
+                <div class="flex-fill">
+                  <pre>
+                    <code class="language-ruby">
+                      User.joins(:notes)
+                    </code>
+                  </pre>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-start">
+                <div>
+                  <h5 class="mt-4 mx-1">C.</h5>
+                </div>
+                <div class="flex-fill">
+                  <pre>
+                    <code class="language-ruby">
+                      User.all
+                    </code>
+                  </pre>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-start">
+                <div>
+                  <h5 class="mt-1 mx-1">D.</h5>
+                </div>
+                <div class="flex-fill">
+                  <p class="lead font-weight-400">None of the above</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
