@@ -724,7 +724,7 @@
               </div>
             </div>
 
-            <div class="accordion-item mb-4">
+            <div class="accordion-item mb-4 border-btm-custom">
               <h2 class="accordion-header" id="questionFifteen">
                 <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionFifteen" aria-expanded="true" aria-controls="aiQuestionFifteen">
                   What are strong parameters?
@@ -733,6 +733,20 @@
               <div id="aiQuestionFifteen" class="accordion-collapse collapse" aria-labelledby="questionFifteen" data-bs-parent="#accordionExample">
                 <div class="accordion-body bg-white">
                   <p class="lead font-weight-400">With strong parameters, Action Controller parameters are forbidden to be used in Active Model mass assignments until they have been permitted.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item mb-4">
+              <h2 class="accordion-header" id="questionSixteen">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionSixteen" aria-expanded="true" aria-controls="aiQuestionSixteen">
+                  What is flash?
+                </button>
+              </h2>
+              <div id="aiQuestionSixteen" class="accordion-collapse collapse" aria-labelledby="questionSixteen" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400">The flash is a special part of the session which is cleared with each request. This means that values stored there will only be available in the next request, which is useful for passing error messages, etc.</p>
+                  <p class="lead font-weight-400">The flash is accessed via the flash method. Like the session, the flash is represented as a hash.</p>
                 </div>
               </div>
             </div>
