@@ -737,7 +737,7 @@
               </div>
             </div>
 
-            <div class="accordion-item mb-4">
+            <div class="accordion-item mb-4 border-btm-custom">
               <h2 class="accordion-header" id="questionSixteen">
                 <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionSixteen" aria-expanded="true" aria-controls="aiQuestionSixteen">
                   What is flash?
@@ -747,6 +747,107 @@
                 <div class="accordion-body bg-white">
                   <p class="lead font-weight-400">The flash is a special part of the session which is cleared with each request. This means that values stored there will only be available in the next request, which is useful for passing error messages, etc.</p>
                   <p class="lead font-weight-400">The flash is accessed via the flash method. Like the session, the flash is represented as a hash.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item mb-4 border-btm-custom">
+              <h2 class="accordion-header" id="questionSeventeen">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionSeventeen" aria-expanded="true" aria-controls="aiQuestionSeventeen">
+                  What is shallow nesting of routes and when to use this?  
+                </button>
+              </h2>
+              <div id="aiQuestionSeventeen" class="accordion-collapse collapse" aria-labelledby="questionSeventeen" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400">Shallow nesting is useful when you want to avoid deep level of nesting of resources. Shallow routes generate the collection actions scoped under the parent, so as to get a sense of the hierarchy, but to not nest the member actions. In other words, to only build routes with the minimal amount of information to uniquely identify the resource.</p>
+                  <p class="lead font-weight-400 mb-4">For example look at the example below:</p>
+                  <pre>
+                    <code class="language-ruby">
+                      resources :articles do
+                        resources: :comments
+                      end
+                    </code>
+                  </pre>
+
+                  <p class="lead font-weight-400 mt-4">Will generate routes for comments like this: </p>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Shifali Starting Here -->
+
+            <div class="accordion-item mb-4">
+              <h2 class="accordion-header" id="questionEighteen">
+                <button class="accordion-button font-weight-500 font-size-145 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aiQuestionEighteen" aria-expanded="true" aria-controls="aiQuestionEighteen">
+                  Explain concerns in Rails and give an example of concern with class methods.  
+                </button>
+              </h2>
+              <div id="aiQuestionEighteen" class="accordion-collapse collapse" aria-labelledby="questionEighteen" data-bs-parent="#accordionExample">
+                <div class="accordion-body bg-white">
+                  <p class="lead font-weight-400">A Rails Concern is any module that extends ActiveSupport::Concern module. Consider the following example concern which has some class methods implemented: </p>
+                  <pre>
+                    <code class="language-ruby">
+                    module Scoppable
+                      extend ActiveSupport::Concern
+
+                      class_methods do 
+                        def created_in_current_month
+                          start_date = DateTime.current.beginning_of_month
+                          end_date = start_date.end_of_month
+                          results(start_date, end_date)
+                        end
+
+                        def created_in_last_n_months(n)
+                          start_date = (DateTime.current - n.months).beginning_of_month
+                          end_date = start_date.end_of_month
+                          results(start_date, end_date)
+                        end
+
+                        def results(sd, ed)
+                          where('created_at BETWEEN ? AND ?', sd, ed)
+                        end  
+                      end
+
+                    end 
+                    </code>
+                  </pre>
+
+                  <p class="lead font-weight-400 mt-4">Now you can use this concern into any of your model class. For example I am using this module into a model named Project.
+                  </p>
+
+                  <pre>
+                    <code class="language-ruby">
+                      class Project < ApplicationRecord
+                        include Scoppable
+                      end
+                    </code>
+                  </pre>
+
+                  <p class="lead font-weight-400 mt-4">Now when I run following query:</p>
+                  <pre>
+                    <code class="language-ruby">
+                      Project.created_in_current_month
+                    </code>
+                  </pre>
+                  <p class="lead font-weight-400 mt-4">
+                    this will return all the projects created in current month.
+                  </p>
+                  <p class="lead font-weight-400 mt-4">
+                    And when I run following query:
+                  </p>
+                  <pre>
+                    <code class="language-ruby">
+                      Project.created_in_last_n_months(10)
+                    </code>
+                  </pre>
+                  <p class="lead font-weight-400 mt-4">
+                    this will return all the projects created in last 10 month.
+                  </p>
+
+                  <p class="lead font-weight-400 mt-4">
+                    This is just an example and you can implement such concerns as per your needs.
+                  </p>
                 </div>
               </div>
             </div>
